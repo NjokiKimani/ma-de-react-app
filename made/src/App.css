@@ -4,5 +4,6 @@
 @import "bootstrap/dist/css/bootstrap.css";
 
 
-
-
+*{
+    background: #08422f;
+}
