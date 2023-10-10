@@ -8,11 +8,34 @@ function Homepage() {
 
     //states
 const [taskList, setTaskList] = useState([{tasks:''}])
+const [data, setData] = useState(
+    {
+        name:'',
+        tasks:''
+    }
+)
 
 //utility functions
 const handleAdd = () => {
     setTaskList([...taskList, {task:""}])
 }
+
+const handleRemove = () => {
+    setTaskList([...taskList].splice(1))
+    }
+
+const handleChange = (e) => {
+       setData((prev) => {
+        return {...prev, [e.target.name]: e.target.value}
+       });
+}
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(data)
+ 
+}
+
   return (
     <div className="w-full h-screen p-2 bg-[#08422f]">
       <header>
@@ -32,13 +55,14 @@ const handleAdd = () => {
       </div>
       <div className="w-full  border-black border-2 flex flex-col items-center ">
         <div className="border-2 border-purple-300 rounded-lg text-center my-12 py-3 px-2 bg-[#eff2ed] text-[#00240c]">
-          <Form className="inline-block mx-0 text-left bg-[#eff2ed]">
+          <Form onSubmit={handleSubmit} className="inline-block mx-0 text-left bg-[#eff2ed]">
             <FormGroup className="mb-3 bg-[#eff2ed]">
               <FormLabel className="bg-[#eff2ed]">
                 Name
                 <span className="text-[#b76038] bg-[#eff2ed]">*</span>
               </FormLabel>
               <FormControl
+              onChange={handleChange}
                 type="text"
                 placeholder="Enter name"
                 className="focus:border-[#00240c] focus:ring-0 focus:outline-none"
@@ -58,16 +82,18 @@ const handleAdd = () => {
               {taskList.map((t, i) => (
                 <div key={i}>
                   <div className="border-2 border-red-200 bg-[#eff2ed] flex justify-between items-center">
-                    {" "}
                     <FormControl
+                    onChange={handleChange}
                       type="text"
+                      name='tasks'
                       placeholder="Enter task"
                       required
                       autoComplete="off"
                       className="mr-12 focus:border-[#00240c] focus:ring-0 focus:outline-none"
-                    />{" "}
+                    />
                     {taskList.length !== 1 && (
                       <Button
+                      onClick={handleRemove}
                         className="text-[#eff2ed] bg-[#e9b095] border-[#e9b095] hover:bg-[#eff2ed] hover:border-[#e9b095] hover:text-[#e9b095]
                  active:!bg-[#eff2ed] active:!text-[#e9b095] active:!border-[#e9b095]"
                       >
@@ -93,6 +119,7 @@ const handleAdd = () => {
 
             <div className="flex justify-center items-center bg-[#eff2ed]">
               <Button
+              type='submit'
                 className="text-[#eff2ed] my-6 bg-[#00240c] border-[#00240c] hover:bg-[#eff2ed] hover:border-[#00240c] hover:text-[#00240c]
                active:!bg-[#eff2ed] active:!text-[#00240c] active:!border-[#00240c]"
               >
