@@ -8,30 +8,35 @@ function Homepage() {
 
     //states
 const [taskList, setTaskList] = useState([{tasks:''}])
-const [data, setData] = useState(
-    {
-        name:'',
-        tasks:''
-    }
-)
+const [name, setName] = useState('')
 
 //utility functions
 const handleAdd = () => {
-    setTaskList([...taskList, {task:""}])
+    setTaskList([...taskList, {tasks:""}])
 }
 
-const handleRemove = () => {
-    setTaskList([...taskList].splice(1))
+const handleRemove = (i) => {
+    setTaskList([...taskList].splice(i, 1))
     }
 
-const handleChange = (e) => {
-       setData((prev) => {
-        return {...prev, [e.target.name]: e.target.value}
-       });
+const handleTaskChange = (e, i) => {
+    const {name, value} = e.target;
+    const list = [...taskList];
+    list [i][name] = value;
+    setTaskList(list)
+    
 }
+
+//const handleChange = (e) => {
+  //setData((prev) => {
+ // return {...prev, [e.target.name]: e.target.value}
+  //});
+//}
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    const data = {name, taskList}
+    console.log(taskList)
     console.log(data)
  
 }
@@ -62,8 +67,9 @@ const handleSubmit = (e) => {
                 <span className="text-[#b76038] bg-[#eff2ed]">*</span>
               </FormLabel>
               <FormControl
-              onChange={handleChange}
+              onChange={(e) => setName(e.target.value)}
                 type="text"
+                value={name}
                 placeholder="Enter name"
                 className="focus:border-[#00240c] focus:ring-0 focus:outline-none"
                 required
@@ -83,15 +89,16 @@ const handleSubmit = (e) => {
                 <div key={i}>
                   <div className="border-2 border-red-200 bg-[#eff2ed] flex justify-between items-center">
                     <FormControl
-                    onChange={handleChange}
+                    onChange={(e) => handleTaskChange(e, i)}
                       type="text"
                       name='tasks'
+                     value={t.tasks}
                       placeholder="Enter task"
                       required
                       autoComplete="off"
                       className="mr-12 focus:border-[#00240c] focus:ring-0 focus:outline-none"
                     />
-                    {taskList.length !== 1 && (
+                    {taskList.length !== 1 && taskList.length < 7 &&(
                       <Button
                       onClick={handleRemove}
                         className="text-[#eff2ed] bg-[#e9b095] border-[#e9b095] hover:bg-[#eff2ed] hover:border-[#e9b095] hover:text-[#e9b095]
