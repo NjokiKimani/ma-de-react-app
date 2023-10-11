@@ -16,7 +16,7 @@ const handleAdd = () => {
 }
 
 const handleRemove = (i) => {
-    setTaskList([...taskList].splice(i, 1))
+    setTaskList([...taskList].splice(1))
     }
 
 const handleTaskChange = (e, i) => {
@@ -27,11 +27,7 @@ const handleTaskChange = (e, i) => {
     
 }
 
-//const handleChange = (e) => {
-  //setData((prev) => {
- // return {...prev, [e.target.name]: e.target.value}
-  //});
-//}
+
 
 const handleSubmit = (e) => {
     e.preventDefault();
