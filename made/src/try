@@ -12,3 +12,26 @@
           <h3 className='text-center uppercase underline my-12 py-4 px-2  border-2 '>Today's task</h3>
 
         </div>
+
+          {response.response && (
+        <div className="text-[#fdfcfb]">
+          <h1 className="text-4xl my-4 text-center py-4 px-2 font-thin border-2 border-black">
+            Ma—De
+            <hr className="opacity-20" />
+          </h1>
+          <p className="text-center text-xl my-8 py-4 px-2 border-2 border-yellow-200">
+            Good {time},{" "}
+            <span className="capitalize underline">
+       
+            </span>
+            .It's {day}, {month} {date}.
+            <br />
+            Today at a glance:
+          </p>
+          <h3 className="text-center uppercase underline my-12 py-4 px-2  border-2 ">
+            Today's task
+          </h3>
+
+       
+        </div>
+      )}

@@ -33,7 +33,7 @@ const handleSubmit = (e) => {
     e.preventDefault();
     const data = {name, taskList}
     setResponse(data)
-    console.log(data)
+    //console.log(data)
     navigate('/made')
   
  
