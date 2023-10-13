@@ -9,6 +9,9 @@ import './App.css';
 //pages imports
 import Homepage from './Homepage';
 import Madepage from './Madepage';
+import Quote from './Quote';
+
+
 import { useState } from 'react';
 
 function App() {
@@ -19,9 +22,8 @@ const [response, setResponse] = useState()
   return (
     <Router className="bg-[#08422f]">
       <Routes>
-        <Route path="/" element={<Homepage setResponse={setResponse} />}></Route>
-        <Route path="made" element={<Madepage response={response} />}></Route>
-      </Routes>
+        <Route path='/' element={<Quote />}></Route>
+        </Routes>
     </Router>
   );
 }
