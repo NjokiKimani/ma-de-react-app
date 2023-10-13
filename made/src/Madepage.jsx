@@ -1,69 +1,40 @@
-import React, {useState, useEffect} from 'react'
+//import React, {useState, useEffect} from 'react'
 
 //dependencies imports
-import { useNavigate, useLocation } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
 
-function Madepage(response) {
+function Madepage() {
+  const [randomTask, setRandomTask] = useState(null);
 
-  
-//let name = response.response.name
-//console.log(name)
-const now = new Date();
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-const day = days[now.getDay()]
-const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-const month = months[now.getMonth()]
-const hour = now.getHours()
-const minutes = now.getMinutes()
-const date = now.getDate()
-
-const location = useLocation();
-let time;
-
-const [formData, setFormData] = useState(response)
-
- // e.preventDefault()
- 
+  useEffect(() => {
+    // Check if there's a saved response in local storage
+    const savedResponse = localStorage.getItem("savedResponse");
 
 
+    if (savedResponse) {
+      const response = JSON.parse(savedResponse);
+    console.log(response);
 
-console.log(formData.response)
+      if (response.name && response.taskList && response.taskList.length > 0) {
+        const randomIndex = Math.floor(
+          Math.random() * response.taskList.length
+        );
+        const randomTask = response.taskList[randomIndex].tasks;
+        setRandomTask(randomTask);
+      }
+    }
+  }, []);
 
-//console.log(data.taskList)
-
-let todaysTask;
-
-
-if(date<10){
-  date=`0${date}`
+  return (
+    <div>
+      <div>
+        {randomTask ? <p>Random Task: {randomTask}</p> : <p>No tasks found.</p>}
+      </div>
+    </div>
+  );
 }
 
-if(date <=9) {
+export default Madepage;
 
-}
-
-if (hour <= 11 && minutes <= 59 ){
-time = 'morning'
-}
-
-else if (hour <= 17 && minutes <= 59) {
-time = 'afternoon'
-}
-
-else{
-  time = 'evening'
-}
-
-return (
-
-<div>
-
-
-
-
-
-</div>
-)
- 
  // return <div>{data && data.taskList.map((task, i) => <li>{data.taskList}</li>)}</div>;}
-} export default Madepage
+//} export default Madepage

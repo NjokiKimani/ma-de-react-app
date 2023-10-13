@@ -35,3 +35,82 @@
        
         </div>
       )}
+
+
+
+
+      //let name = response.response.name
+//console.log(name)
+const now = new Date();
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const day = days[now.getDay()]
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const month = months[now.getMonth()]
+const hour = now.getHours()
+const minutes = now.getMinutes()
+const date = now.getDate()
+
+const location = useLocation();
+let time;
+
+const formData = response;
+
+
+const tasks = formData.response.taskList.map((taskItem) => taskItem.tasks);
+
+console.log(tasks);
+
+if (formData && formData.response) {
+  const taskList =formData.response.taskList;
+
+  // Check if taskList exists and is not empty
+  if (taskList && taskList.length > 0) {
+    // Generate a random index to select a task
+    const randomIndex = Math.floor(Math.random() * taskList.length);
+
+    // Retrieve the randomly selected task
+    const randomTask = taskList[randomIndex].tasks;
+
+    console.log(randomTask);
+  } else {
+    console.log("No tasks found.");
+  }
+} else {
+  console.log("No response data found.");
+}
+
+console.log(formData)
+
+//console.log(data.taskList)
+
+let todaysTask;
+
+
+if(date<10){
+  date=`0${date}`
+}
+
+if(date <=9) {
+
+}
+
+if (hour <= 11 && minutes <= 59 ){
+time = 'morning'
+}
+
+else if (hour <= 17 && minutes <= 59) {
+time = 'afternoon'
+}
+
+else{
+  time = 'evening'
+}
+
+return (
+  <div>
+    {formData.response &&
+      formData.response.length >= 1 &&
+      formData.response.map((t, i) => <div key={i}>{t.response.name}</div>)}
+  </div>
+);
+ 

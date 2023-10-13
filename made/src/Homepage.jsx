@@ -34,9 +34,12 @@ const handleSubmit = (e) => {
     const data = {name, taskList}
     setResponse(data)
     //console.log(data)
-    navigate('/made')
+
   
- 
+   localStorage.setItem("savedResponse", JSON.stringify(data));
+   navigate("/made");
+
+   console.log(JSON.stringify(data))
 }
 
   return (
